@@ -8,15 +8,15 @@
     this.bodies = createInvaders(this).concat(new Player(this, gameSize));
 
     var self = this;
-    loadSound("shoot.wav", function(shootSound ){
-      self.shootSound = shootSound;
+    // loadSound("shoot.wav", function(shootSound ){
+    //   self.shootSound = shootSound;
     var tick = function(){
       self.update();
       self.draw(screen, gameSize);
       requestAnimationFrame(tick);//browser API, calls tick onces draws game Browsers runs game 60 time a second
     };
     tick();
-  });//running main game function
+  // });//running main game function
   };
   Game.prototype = {
     update: function(){
@@ -40,6 +40,7 @@
       for (var i = 0; i< this.bodies.length; i++){
         drawRect(screen, this.bodies[i]);
       }
+      // thought this was an interesting way to bulid the ships and evil doers
     },
     addBody: function(body){
       this.bodies.push(body);
@@ -51,6 +52,7 @@
         b.center.x - invader.center.x < invader.size.x;
       }).length>0;
     }
+    // like the way that was this was defined to stop evil doers from hurting themselves
   };
 
   var Player = function (game, gameSize){
@@ -72,10 +74,11 @@ Player.prototype = {
           var bullet= new Bullet({x :this.center.x, y: this.center.y -this.size.x/2},
             {x: 0, y: -6});
             this.game.addBody(bullet);
-            this.game.shootSound.load();
-            this.game.shootSound.play();
+            // this.game.shootSound.load();
+            // this.game.shootSound.play();
+            //wav file was fighting me all thru the refacotring. Keeping it and workign with it to try and make it work
         }
-    }
+    }// like this of using input to define the key strokes. Does Capital letters define keys or was this just personal preference?
   };
  // creating the enemies remove all keystrokes as they are not firing.
   var Invader   = function (game, center){
@@ -153,9 +156,9 @@ Player.prototype = {
     //    var sound = new Audio('shoot.wav');
     //    sound.addEventListener('canplaythrough',loaded);
     //    sound.load();
-    //  }
-     //adding and removing sound using call backs to earlier
-              // Seriously just becuase it is a bore does not mean I don not want to learn!//
+
+    //  adding and removing sound using call backs to earlier
+    //           Seriously just becuase it is a bore does not mean I don not want to learn!//
 
 
   window.onload = function(){//Item load after DOM loads
